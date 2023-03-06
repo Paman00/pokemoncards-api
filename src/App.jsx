@@ -50,7 +50,7 @@ function App() {
 		setSearch(value);
 	}, []);
 	const onSearch = (event) => {
-		if(((event.type === "keyup" && event.code === "Enter") || event.type === "click") && search.trim() !== ""){
+		if(((event.type === "keyup" && event.code === "Enter") || event.type === "click") && !!search.trim()){
 			setPage(1);
 			const sentence = search
 				.toLowerCase()

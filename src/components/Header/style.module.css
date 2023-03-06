@@ -16,6 +16,23 @@
     max-width: 1280px; 
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center;  
+}
+
+/*480, 768, 1024*/
+@media screen and (min-width: 480px) {  
+    .navbar {
+        justify-content: space-around;
+    }
+}
+@media screen and (min-width: 768px) {
+    .navbar {
+        border-radius: 0 0 50% 50%; 
+        /*.navbar {*/
+        justify-content: center;
+        /*}*/
+    }
+}
+@media screen and (min-width: 1024px) {
     
 }

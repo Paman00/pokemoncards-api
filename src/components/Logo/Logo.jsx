@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import imgLogo from "../../assets/images/DALLE_Logo.png";
 
 const StyledLogo = styled.img`
     width: 100%;
@@ -7,7 +8,7 @@ const StyledLogo = styled.img`
 const StyledFigure = styled.figure`
     display: flex;
     align-items: center;
-    padding-left: 0.5rem;
+    padding: 0 0.5rem;
     width: 45px;
     height: 45px;
     margin: 0;
@@ -16,7 +17,7 @@ const StyledFigure = styled.figure`
 const Logo = () => {
     return (
         <StyledFigure>
-            <StyledLogo src={`src/assets/images/DALLE_Logo.png`} alt="" />
+            <StyledLogo src={imgLogo} alt="Pokemon logo" />
         </StyledFigure>
     )
 }
