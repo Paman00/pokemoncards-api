@@ -49,15 +49,17 @@ function App() {
 	const onChangeSearch = useCallback((value) => {
 		setSearch(value);
 	}, []);
-	const onSearch = () => {
-		setPage(1);
-		const sentence = search
-			.toLowerCase()
-			.replace(/\s+/g, "+")
-			.replace(/&/g, "%26");
-		setSearched(`"${sentence}"`);
-		setSearch("");
-		onUnFocusCard();
+	const onSearch = (event) => {
+		if(((event.type === "keyup" && event.code === "Enter") || event.type === "click") && search.trim() !== ""){
+			setPage(1);
+			const sentence = search
+				.toLowerCase()
+				.replace(/\s+/g, "+")
+				.replace(/&/g, "%26");
+			setSearched(`"${sentence}"`);
+			setSearch("");
+			onUnFocusCard();
+		}
 	};
 	
 	const canShowMoreCards = useMemo(() => {
