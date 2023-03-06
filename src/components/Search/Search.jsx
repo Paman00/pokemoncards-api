@@ -1,6 +1,9 @@
+import { CgSearch } from "react-icons/cg";
+import s from "./style.module.css";
+
 const Search = ({ search, onChangeSearch, onSearch }) => {
     return (
-        <>
+        <div className={s.searchDiv}>
             <input
                 className={s.input}
                 value={search}
@@ -8,10 +11,14 @@ const Search = ({ search, onChangeSearch, onSearch }) => {
                 placeholder="Search"
                 onKeyUp={onSearch}
             />
-            <button type="button" onClick={onSearch}>
-                Search
+            <button 
+                className={s.btnSearch}
+                type="button" 
+                onClick={onSearch}
+            >
+                <CgSearch />
             </button>
-        </>
+        </div>
     );
 }
 

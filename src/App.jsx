@@ -96,8 +96,9 @@ function App() {
 					/>
 				</div>
 			}
-			<section>
-				<div>
+			<section className={s.mainSection}>
+				{searched && <p className={s.searchedTitle}>Searched: {searched}</p>}
+				<div className={s.cardGrid}>
 					{pokemonData.map((pokemon) => (
 						<CardPreview
 							key={pokemon.id}
@@ -108,8 +109,12 @@ function App() {
 						/>
 					))}
 				</div>
-				<div>
-					<button onClick={onNextPage} disabled={!canShowMoreCards}>
+				<div className={s.btnContainer}>
+					<button 
+						className={s.nextBtn}
+						onClick={onNextPage} 
+						disabled={!canShowMoreCards}
+					>
 						Show More
 					</button>
 				</div>

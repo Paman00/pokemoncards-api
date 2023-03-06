@@ -1,9 +1,9 @@
-import './style.module.css';
+import s from './style.module.css';
 
 const Header = ({children}) => {
     return (
-        <header className="header">
-            <nav className="navbar">
+        <header className={s.header}>
+            <nav className={s.navbar}>
                 {children}
                 <div></div>
             </nav>

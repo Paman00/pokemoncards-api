@@ -1,0 +1,12 @@
+.card {
+    width: 240px;
+    height: 330px;
+    cursor: pointer;
+}
+.img {
+    border-radius: 10px;    
+    width: 100%;
+}
+.card:hover {
+    transform: scale(1.1);
+}

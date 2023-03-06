@@ -1,0 +1,29 @@
+.searchDiv {
+    height: 45px;
+    display: flex;
+}
+.input {
+    height: 100%;
+    box-sizing: border-box;
+    padding: 0 .75rem;
+    border-radius: 5px 0 0 5px;
+    border: 2px solid #d4d4d4;
+    background-color: #f5f5dc;
+    border-right: 2px solid #d4d4d4;
+}
+.input:focus-visible {
+    outline-color: #ff8c00; 
+    outline-style: double;
+    outline-width: 1px;
+    outline-offset: -1px; 
+}
+.btnSearch {
+    height: 100%;
+    width: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5dc;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid #d4d4d4;
+}

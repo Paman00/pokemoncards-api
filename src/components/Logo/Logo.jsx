@@ -2,11 +2,14 @@ import styled from "styled-components";
 
 const StyledLogo = styled.img`
     width: 100%;
-    border-radius: 20%;
+    border-radius: 25%;
 `;
 const StyledFigure = styled.figure`
-    width: 55px;
-    height: 55px;
+    display: flex;
+    align-items: center;
+    padding-left: 0.5rem;
+    width: 45px;
+    height: 45px;
     margin: 0;
 `;
 

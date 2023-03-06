@@ -1,7 +1,16 @@
-const CardPreview = ({  id, src, alt, onFocusCard}) => {
+import s from "./style.module.css";
+
+const CardPreview = ({ id, src, alt, onFocusCard }) => {
     return (
-        <figure onClick={() => onFocusCard(id)}>
-            <img src={src} alt={alt} />
+        <figure 
+            className={s.card}
+            onClick={() => onFocusCard(id)} 
+        >
+            <img 
+                className={s.img}
+                src={src} 
+                alt={alt} 
+            />
         </figure>
     );
 }
