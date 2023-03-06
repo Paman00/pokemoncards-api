@@ -1,34 +1,121 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useState, useEffect, useMemo, useCallback } from "react";
+import { Header } from "./components/Header/Header";
+import { Logo } from "./components/Logo/Logo";
+import { Search } from "./components/Search/Search";
+import { CardDetails } from "./components/CardDetails/CardDetails";
+import { CardPreview } from "./components/CardPreview/CardPreview";
+import { Footer } from "./components/Footer/Footer";
+import { fetchCards, fetchSearch, fetchSingleCard } from "./api";
+import s from "./style.module.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+	const [pokemonData, setPokemonData] = useState([]);
+	const [page, setPage] = useState(1);
+	const [search, setSearch] = useState("");
+	const [searched, setSearched] = useState("");
+	const [totalCards, setTotalCards] = useState(0);
+	const [focusCard, setFocusCard] = useState();
+	const [currentPokemonCard, setCurrentPokemonCard] = useState();
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+	useEffect(() => {
+		const fetchData = async () => {
+			if (searched) {
+				const { data, totalCount } = await fetchSearch(searched, page);
+				console.log(data);
+				setTotalCards(totalCount);
+				page === 1
+					? setPokemonData(data)
+					: setPokemonData((prevState) => [...prevState, ...data]);
+			} else {
+				const { data, totalCount } = await fetchCards(page);
+				console.log(data);
+				setTotalCards(totalCount);
+				setPokemonData((prevState) => [...prevState, ...data]);
+			}
+		};
+		fetchData();
+	}, [page, searched]);
+	useEffect(() => {
+		const fetchCard = async () => {
+			if (focusCard) {
+				const data = await fetchSingleCard(focusCard);
+				console.log(data);
+				setCurrentPokemonCard(data);
+			}
+		};
+		fetchCard();
+	}, [focusCard]);
+
+	const onChangeSearch = useCallback((value) => {
+		setSearch(value);
+	}, []);
+	const onSearch = () => {
+		setPage(1);
+		const sentence = search
+			.toLowerCase()
+			.replace(/\s+/g, "+")
+			.replace(/&/g, "%26");
+		setSearched(`"${sentence}"`);
+		setSearch("");
+		onUnFocusCard();
+	};
+	
+	const canShowMoreCards = useMemo(() => {
+		return 20 * page < totalCards;
+	}, [page, totalCards]);
+	const onNextPage = useCallback(() => {
+		setPage((prevState) => prevState + 1);
+	}, []);
+
+	const onFocusCard = (id) => {
+		setFocusCard(id);
+	};
+	const onUnFocusCard = () => {
+		setCurrentPokemonCard();
+		setFocusCard();
+	};
+
+	return (
+		<div className={s.app}>
+			<Header>
+				<Logo />
+				<Search
+					search={search}
+					onChangeSearch={onChangeSearch}
+					onSearch={onSearch}
+				/>
+			</Header>
+
+			{currentPokemonCard &&
+				<div className={s.modal}>
+					<CardDetails
+						card={currentPokemonCard}
+						onUnFocusCard={onUnFocusCard}
+					/>
+				</div>
+			}
+			<section>
+				<div>
+					{pokemonData.map((pokemon) => (
+						<CardPreview
+							key={pokemon.id}
+							id={pokemon.id}
+							src={pokemon.images.small}
+							alt={pokemon.name}
+							onFocusCard={onFocusCard}
+						/>
+					))}
+				</div>
+				<div>
+					<button onClick={onNextPage} disabled={!canShowMoreCards}>
+						Show More
+					</button>
+				</div>
+			</section>
+
+			<Footer />
+		</div>
+	);
 }
 
-export default App
+export default App;
