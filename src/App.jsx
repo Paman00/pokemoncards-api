@@ -1,10 +1,13 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { Header } from "./components/Header/Header";
-import { Logo } from "./components/Logo/Logo";
-import { Search } from "./components/Search/Search";
-import { CardDetails } from "./components/CardDetails/CardDetails";
-import { CardPreview } from "./components/CardPreview/CardPreview";
-import { Footer } from "./components/Footer/Footer";
+import { Header } from "./components/Header";
+import { Logo } from "./components/Logo";
+import { SearchBar } from "./components/SearchBar";
+import { ModalCard } from "./components/ModalCard";
+import { FullviewCard } from "./components/FullviewCard";
+import { MainSection } from "./components/MainSection";
+import { PreviewSearched } from "./components/PreviewSearched";
+import { PreviewCard } from "./components/PreviewCard";
+import { Footer } from "./components/Footer";
 import { fetchCards, fetchSearch, fetchSingleCard } from "./api";
 import s from "./style.module.css";
 
@@ -50,7 +53,11 @@ function App() {
 		setSearch(value);
 	}, []);
 	const onSearch = (event) => {
-		if(((event.type === "keyup" && event.code === "Enter") || event.type === "click") && !!search.trim()){
+		if (
+			((event.type === "keyup" && event.code === "Enter") ||
+				event.type === "click") &&
+			!!search.trim()
+		) {
 			setPage(1);
 			const sentence = search
 				.toLowerCase()
@@ -61,7 +68,7 @@ function App() {
 			onUnFocusCard();
 		}
 	};
-	
+
 	const canShowMoreCards = useMemo(() => {
 		return 20 * page < totalCards;
 	}, [page, totalCards]);
@@ -69,38 +76,40 @@ function App() {
 		setPage((prevState) => prevState + 1);
 	}, []);
 
-	const onFocusCard = (id) => {
+	const onFocusCard = useCallback((id) => {
 		setFocusCard(id);
-	};
-	const onUnFocusCard = () => {
-		setCurrentPokemonCard();
-		setFocusCard();
-	};
+	}, []);
+	const onUnFocusCard = useCallback(() => {
+		setCurrentPokemonCard(undefined);
+		setFocusCard(undefined);
+	}, []);
 
 	return (
 		<div className={s.app}>
 			<Header>
 				<Logo />
-				<Search
+				<SearchBar
 					search={search}
 					onChangeSearch={onChangeSearch}
 					onSearch={onSearch}
 				/>
 			</Header>
 
-			{currentPokemonCard &&
-				<div className={s.modal}>
-					<CardDetails
+			{currentPokemonCard && (
+				<ModalCard onUnFocusCard={onUnFocusCard}>
+					<FullviewCard
 						card={currentPokemonCard}
 						onUnFocusCard={onUnFocusCard}
 					/>
-				</div>
-			}
-			<section className={s.mainSection}>
-				{searched && <p className={s.searchedTitle}>Searched: {searched}</p>}
+				</ModalCard>
+			)}
+
+			<MainSection onNextPage={onNextPage} canShowMoreCards={canShowMoreCards}>
+				{searched && <PreviewSearched searched={searched} />}
+
 				<div className={s.cardGrid}>
 					{pokemonData.map((pokemon) => (
-						<CardPreview
+						<PreviewCard
 							key={pokemon.id}
 							id={pokemon.id}
 							src={pokemon.images.small}
@@ -110,15 +119,15 @@ function App() {
 					))}
 				</div>
 				<div className={s.btnContainer}>
-					<button 
+					<button
 						className={s.nextBtn}
-						onClick={onNextPage} 
+						onClick={onNextPage}
 						disabled={!canShowMoreCards}
 					>
 						Show More
 					</button>
 				</div>
-			</section>
+			</MainSection>
 
 			<Footer />
 		</div>

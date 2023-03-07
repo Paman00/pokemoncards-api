@@ -1,7 +1,7 @@
 import { CgSearch } from "react-icons/cg";
 import s from "./style.module.css";
 
-const Search = ({ search, onChangeSearch, onSearch }) => {
+const SearchBar = ({ search, onChangeSearch, onSearch }) => {
     return (
         <div className={s.searchDiv}>
             <input
@@ -22,4 +22,4 @@ const Search = ({ search, onChangeSearch, onSearch }) => {
     );
 }
 
-export { Search };
+export { SearchBar };

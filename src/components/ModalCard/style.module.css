@@ -1,0 +1,13 @@
+.modal {
+    padding-top: 60px;
+    background-color: #00000080;
+    position: fixed;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

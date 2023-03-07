@@ -4,22 +4,7 @@
 
     text-align: center;
 }
-.modal {
-    background-color: #00000080;
-    position: fixed;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    z-index: 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.mainSection {
-    padding: 1rem 1.5rem 0;
-    margin: auto;
-}
+
 .cardGrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -27,13 +12,13 @@
     grid-gap: 2rem;
     justify-items: center;
 }
-.btnContainer {
-    padding: 1.5em;
-}
 .searchedTitle {
     text-align: left;
     margin-bottom: 1em;
     font-weight: 600;
+}
+.btnContainer {
+    padding: 1.5em;
 }
 .nextBtn {
     font-weight: 600;

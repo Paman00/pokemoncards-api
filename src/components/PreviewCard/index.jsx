@@ -1,6 +1,6 @@
 import s from "./style.module.css";
 
-const CardPreview = ({ id, src, alt, onFocusCard }) => {
+const PreviewCard = ({ id, src, alt, onFocusCard }) => {
     return (
         <figure 
             className={s.card}
@@ -15,4 +15,4 @@ const CardPreview = ({ id, src, alt, onFocusCard }) => {
     );
 }
 
-export { CardPreview };
+export { PreviewCard };
