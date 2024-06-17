@@ -1,5 +1,5 @@
 import { CgSearch } from "react-icons/cg";
-import s from "./style.module.css";
+import s from "./SearchBar.module.css";
 
 const SearchBar = ({ search, onChangeSearch, onSearch }) => {
     return (

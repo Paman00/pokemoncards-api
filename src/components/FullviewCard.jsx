@@ -1,6 +1,6 @@
 import { GrClose } from "react-icons/gr";
-import { IconEnergy } from "../IconEnergy";
-import s from "./style.module.css";
+import { IconEnergy } from "./IconEnergy";
+import s from "./FullviewCard.module.css";
 
 const FullviewCard = ({ card, onUnFocusCard }) => {
 	return (

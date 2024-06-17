@@ -8,8 +8,8 @@ import { MainSection } from "./components/MainSection";
 import { PreviewSearched } from "./components/PreviewSearched";
 import { PreviewCard } from "./components/PreviewCard";
 import { Footer } from "./components/Footer";
-import { fetchCards, fetchSearch, fetchSingleCard } from "./api";
-import s from "./style.module.css";
+import { fetchCards, fetchSearch, fetchSingleCard } from "./services/pokemon";
+import s from "./App.module.css";
 
 function App() {
 	const [pokemonData, setPokemonData] = useState([]);
@@ -24,14 +24,12 @@ function App() {
 		const fetchData = async () => {
 			if (searched) {
 				const { data, totalCount } = await fetchSearch(searched, page);
-				console.log(data);
 				setTotalCards(totalCount);
 				page === 1
 					? setPokemonData(data)
 					: setPokemonData((prevState) => [...prevState, ...data]);
 			} else {
 				const { data, totalCount } = await fetchCards(page);
-				console.log(data);
 				setTotalCards(totalCount);
 				setPokemonData((prevState) => [...prevState, ...data]);
 			}
@@ -42,7 +40,6 @@ function App() {
 		const fetchCard = async () => {
 			if (focusCard) {
 				const data = await fetchSingleCard(focusCard);
-				console.log(data);
 				setCurrentPokemonCard(data);
 			}
 		};
@@ -96,7 +93,7 @@ function App() {
 			</Header>
 
 			{currentPokemonCard && (
-				<ModalCard onUnFocusCard={onUnFocusCard}>
+				<ModalCard>
 					<FullviewCard
 						card={currentPokemonCard}
 						onUnFocusCard={onUnFocusCard}

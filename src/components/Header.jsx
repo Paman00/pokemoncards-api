@@ -1,4 +1,4 @@
-import s from './style.module.css';
+import s from './Header.module.css';
 
 const Header = ({children}) => {
     return (
