@@ -1,11 +1,5 @@
-import s from "./MainSection.module.css";
-
 const MainSection = ({ children }) => {
-    return (
-        <section className={s.mainSection}>
-            {children}
-        </section>
-    )
-}
+  return <section className='px-6 pb-0 pt-4'>{children}</section>;
+};
 
 export { MainSection };

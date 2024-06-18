@@ -1,7 +1,5 @@
-import s from "./PreviewSearched.module.css";
-
 const PreviewSearched = ({ searched }) => {
-	return <p className={s.searchedTitle}>Searched: {searched}</p>;
+  return <p className='mb-4 text-left font-semibold'>Searched: {searched}</p>;
 };
 
 export { PreviewSearched };

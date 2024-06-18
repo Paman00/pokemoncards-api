@@ -1,43 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,400;0,600;1,400&display=swap');
-* {
-    transition: 0.5s all ease-in-out;
-}
 
-body {
-    margin: 0;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 400;
+@tailwind base;
 
-    color: #000000;
-    background-color: whitesmoke;
+@layer base {
+    html {
+        @apply font-raleway scroll-smooth;
+    }
 
-    font-synthesis: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-text-size-adjust: 100%;
-}
-
-p,
-h2,
-h4,
-h5 
-{
-    margin: 0;
-}
-
-a {
-    font-weight: 400;
-    color: #000000;
-    text-decoration: inherit;
-}
-
-figure {
-    margin: 0;
-}
-
-@media screen and (min-width: 1440px) {
     body {
-        font-size: 20px;
+        @apply m-0 font-normal antialiased;
     }
 }
+
+@tailwind components;
+@tailwind utilities;

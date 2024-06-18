@@ -1,36 +1,37 @@
-import { RxExternalLink } from "react-icons/rx";
-import s from "./Footer.module.css";
+import { ExternalLink } from './Icons/ExternalLink';
 
 const Footer = () => {
-	return (
-		<footer className={s.footer}>
-			<div className={s.divFooter}>
-				<p>
-					Using the{" "}
-					<a 
-                        className={s.anchor}
-                        href="https://dev.pokemontcg.io/" 
-                        target="_blank"
-                    >
-						Pokémon TGC API <RxExternalLink />
-					</a>
-				</p>
-			</div>
-			<hr className={s.hr}/>
-			<div className={s.divFooter}>
-				<h5>
-					© 2023 | Developed and designed by{" "}
-					<a
-                        className={s.anchor}
-						href="https://www.linkedin.com/in/angel-garcia-beltran"
-						target="_blank"
-					>
-						Miguel Angel Garcia Beltrán <RxExternalLink />
-					</a>
-				</h5>
-			</div>
-		</footer>
-	);
+  return (
+    <footer className='rounded-t-lg bg-gray-300 py-4'>
+      <div className='p-4'>
+        <p>
+          Using the{' '}
+          <a
+            className='inline-flex items-center font-semibold transition-colors duration-200 ease-in-out hover:text-yellow-900'
+            href='https://dev.pokemontcg.io/'
+            target='_blank'
+            rel='noreferrer'
+          >
+            Pokémon TGC API <ExternalLink className='h-4' />
+          </a>
+        </p>
+      </div>
+      <hr className='m-0' />
+      <div className='p-4'>
+        <h5>
+          © 2023 | Developed and designed by{' '}
+          <a
+            className='inline-flex items-center font-semibold transition-colors duration-200 ease-in-out hover:text-yellow-900'
+            href='https://www.linkedin.com/in/angel-garcia-beltran'
+            target='_blank'
+            rel='noreferrer'
+          >
+            Miguel Angel Garcia Beltrán <ExternalLink className='h-4' />
+          </a>
+        </h5>
+      </div>
+    </footer>
+  );
 };
 
 export { Footer };
