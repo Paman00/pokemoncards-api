@@ -1,4 +1,4 @@
-import { Search } from './Icons/Search';
+import { Search } from '@components/Icons/Search';
 
 const SearchBar = ({ search, onChangeSearch, onSearch }) => {
   return (

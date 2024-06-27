@@ -1,4 +1,4 @@
-import { ExternalLink } from './Icons/ExternalLink';
+import { ExternalLink } from '@components/Icons/ExternalLink';
 
 const Footer = () => {
   return (

@@ -1,130 +1,41 @@
-import { useState, useEffect, useMemo, useCallback } from 'react';
-import { Header } from './components/Header';
-import { Logo } from './components/Logo';
-import { SearchBar } from './components/SearchBar';
-import { ModalCard } from './components/ModalCard';
-import { FullviewCard } from './components/FullviewCard';
-import { MainSection } from './components/MainSection';
-import { PreviewSearched } from './components/PreviewSearched';
-import { PreviewCard } from './components/PreviewCard';
-import { Footer } from './components/Footer';
-import { fetchCards, fetchSearch, fetchSingleCard } from './services/pokemon';
+import { lazy, Suspense } from 'react';
+import { Link, BrowserRouter, Routes, Route } from 'react-router-dom';
 
-function App () {
-  const [pokemonData, setPokemonData] = useState([]);
-  const [page, setPage] = useState(1);
-  const [search, setSearch] = useState('');
-  const [searched, setSearched] = useState('');
-  const [totalCards, setTotalCards] = useState(0);
-  const [focusCard, setFocusCard] = useState();
-  const [currentPokemonCard, setCurrentPokemonCard] = useState();
+const V0Page = lazy(() => import('@pages/V1/V1Page'));
 
-  useEffect(() => {
-    const fetchData = async () => {
-      if (searched) {
-        const { data, totalCount } = await fetchSearch(searched, page);
-        setTotalCards(totalCount);
-        page === 1
-          ? setPokemonData(data)
-          : setPokemonData((prevState) => [...prevState, ...data]);
-      } else {
-        const { data, totalCount } = await fetchCards(page);
-        setTotalCards(totalCount);
-        setPokemonData((prevState) => [...prevState, ...data]);
-      }
-    };
-    fetchData();
-  }, [page, searched]);
-  useEffect(() => {
-    const fetchCard = async () => {
-      if (focusCard) {
-        const data = await fetchSingleCard(focusCard);
-        setCurrentPokemonCard(data);
-      }
-    };
-    fetchCard();
-  }, [focusCard]);
-
-  const onChangeSearch = useCallback((value) => {
-    setSearch(value);
-  }, []);
-  const onSearch = (event) => {
-    const isEnterKey = event.type === 'keyup' && event.code === 'Enter';
-    if ((isEnterKey || event.type === 'click') && !!search.trim()) {
-      setPage(1);
-      const sentence = search
-        .toLowerCase()
-        .replace(/\s+/g, '+')
-        .replace(/&/g, '%26');
-      setSearched(`"${sentence}"`);
-      setSearch('');
-      onUnFocusCard();
-    }
-  };
-
-  const canShowMoreCards = useMemo(() => {
-    return 20 * page < totalCards;
-  }, [page, totalCards]);
-  const onNextPage = useCallback(() => {
-    setPage((prevState) => prevState + 1);
-  }, []);
-
-  const onFocusCard = useCallback((id) => {
-    setFocusCard(id);
-  }, []);
-  const onUnFocusCard = useCallback(() => {
-    setCurrentPokemonCard(undefined);
-    setFocusCard(undefined);
-  }, []);
-
+const App = () => {
   return (
-    <div className='m-auto max-w-screen-xl text-center'>
-      <Header>
-        <Logo />
-        <SearchBar
-          search={search}
-          onChangeSearch={onChangeSearch}
-          onSearch={onSearch}
-        />
-      </Header>
-
-      {currentPokemonCard && (
-        <ModalCard>
-          <FullviewCard
-            card={currentPokemonCard}
-            onUnFocusCard={onUnFocusCard}
+    <Suspense fallback={<div>Loading...</div>}>
+      <BrowserRouter basename='/pokemoncards-api/'>
+        <Routes>
+          <Route
+            path='/'
+            element={
+              <div className='flex h-screen flex-col items-center justify-center'>
+                <div className='text-center'>
+                  <h1 className='rounded-t bg-black p-1 font-bold text-white'>
+                    🚧🚧 <span className='underline'>Work in progress</span>{' '}
+                    🚧🚧
+                  </h1>
+                  <Link
+                    to='/v1'
+                    className='block rounded-b border border-black p-1'
+                  >
+                    {' -> '}
+                    <span className='relative inline-block after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-black after:transition-[width] hover:after:w-full'>
+                      Go to Version 1
+                    </span>
+                    {' <- '}
+                  </Link>
+                </div>
+              </div>
+            }
           />
-        </ModalCard>
-      )}
-
-      <MainSection onNextPage={onNextPage} canShowMoreCards={canShowMoreCards}>
-        {searched && <PreviewSearched searched={searched} />}
-
-        <div className='grid auto-rows-auto grid-cols-[repeat(auto-fit,minmax(15rem,1fr))] justify-items-center gap-8'>
-          {pokemonData.map((pokemon) => (
-            <PreviewCard
-              key={pokemon.id}
-              id={pokemon.id}
-              src={pokemon.images.small}
-              alt={pokemon.name}
-              onFocusCard={onFocusCard}
-            />
-          ))}
-        </div>
-        <div className='p-6'>
-          <button
-            className='cursor-pointer rounded border-2 border-solid border-orange-500 bg-orange-500 px-4 py-3 font-semibold text-white transition-all duration-200 hover:scale-95 hover:bg-white hover:text-orange-500 disabled:cursor-default disabled:border-gray-300 disabled:bg-gray-300 disabled:text-gray-500 disabled:hover:scale-100'
-            onClick={onNextPage}
-            disabled={!canShowMoreCards}
-          >
-            Show More
-          </button>
-        </div>
-      </MainSection>
-
-      <Footer />
-    </div>
+          <Route path='/v1' element={<V0Page />} />
+        </Routes>
+      </BrowserRouter>
+    </Suspense>
   );
-}
+};
 
 export default App;

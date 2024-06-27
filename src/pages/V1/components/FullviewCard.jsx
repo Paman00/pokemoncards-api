@@ -1,4 +1,4 @@
-import { Close } from './Icons/Close';
+import { Close } from '@components/Icons/Close';
 import { EnergyImage } from './EnergyImage';
 
 const FullviewCard = ({ card, onUnFocusCard }) => {
@@ -33,7 +33,8 @@ const FullviewCard = ({ card, onUnFocusCard }) => {
                 <p>
                   {card.supertype}
                   {card.subtypes && ` - ${card.subtypes[0]}`}
-                  {card.subtypes.length > 1 &&
+                  {card.subtypes &&
+                    card.subtypes.length > 1 &&
                     card.subtypes.slice(1).map((subtype) => `, ${subtype}`)}
                 </p>
               </div>
@@ -139,17 +140,15 @@ const FullviewCard = ({ card, onUnFocusCard }) => {
 
               <div className='pokeDetailsInfo'>
                 <p className='text-xs'>RETREAT COST</p>
-                {(card.retreatCost &&
-                  card.retreatCost.map((retreatCost, id) => (
-                    <EnergyImage
-                      type={retreatCost}
-                      key={`${retreatCost}${id}`}
-                    />
-                  ))) || (
-                    <div className='flex items-center justify-center'>
-                      <p>N/A</p>
-                    </div>
-                )}
+                <div className='flex items-center justify-center'>
+                  {(card.retreatCost &&
+                    card.retreatCost.map((retreatCost, id) => (
+                      <EnergyImage
+                        type={retreatCost}
+                        key={`${retreatCost}${id}`}
+                      />
+                    ))) || <p>N/A</p>}
+                </div>
               </div>
             </div>
 
