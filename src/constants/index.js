@@ -1,5 +1,5 @@
 export const THEME_TYPES = {
-  LIGHT: 'light',
-  DARK: 'dark',
-  DEFAULT: 'default'
+  LIGHT: 'Light',
+  DARK: 'Dark',
+  DEFAULT: 'Default'
 };

@@ -1,4 +1,4 @@
-export const CloseIcon = ({ className = '' }) => (
+export const ChromaIcon = ({ className = '' }) => (
   <svg
     className={className}
     xmlns='http://www.w3.org/2000/svg'
@@ -8,11 +8,11 @@ export const CloseIcon = ({ className = '' }) => (
     fill='none'
     strokeLinecap='round'
     strokeLinejoin='round'
-    strokeWidth='1'
+    strokeWidth='2'
     viewBox='0 0 24 24'
-    data-icon='SvgX'
+    data-icon='SvgChroma'
     aria-hidden='true'
   >
-    <path d='M5.636 5.636l12.728 12.728m-12.728 0L18.364 5.636m0 0' />
+    <path d='M12 7.8a6.6 6.6 0 11-4.667 1.933A6.58 6.58 0 0112 7.8zM5.4 3h13.2' />
   </svg>
 );

@@ -23,6 +23,14 @@ export default defineConfig({
       {
         find: '@assets',
         replacement: path.resolve(path.join(__dirname, '/src/assets'))
+      },
+      {
+        find: '@store',
+        replacement: path.resolve(path.join(__dirname, '/src/store'))
+      },
+      {
+        find: '@constants',
+        replacement: path.resolve(path.join(__dirname, '/src/constants'))
       }
     ]
   }

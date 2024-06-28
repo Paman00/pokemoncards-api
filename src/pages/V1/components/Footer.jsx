@@ -1,4 +1,4 @@
-import { ExternalLink } from '@components/Icons/ExternalLink';
+import { ExternalLinkIcon } from '@components/Icons/ExternalLink';
 
 const Footer = () => {
   return (
@@ -12,7 +12,7 @@ const Footer = () => {
             target='_blank'
             rel='noreferrer'
           >
-            Pokémon TGC API <ExternalLink className='h-4' />
+            Pokémon TGC API <ExternalLinkIcon className='h-4' />
           </a>
         </p>
       </div>
@@ -26,7 +26,7 @@ const Footer = () => {
             target='_blank'
             rel='noreferrer'
           >
-            Miguel Angel Garcia Beltrán <ExternalLink className='h-4' />
+            Miguel Angel Garcia Beltrán <ExternalLinkIcon className='h-4' />
           </a>
         </h5>
       </div>

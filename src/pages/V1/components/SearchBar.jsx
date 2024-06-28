@@ -1,4 +1,4 @@
-import { Search } from '@components/Icons/Search';
+import { SearchIcon } from '@components/Icons/Search';
 
 const SearchBar = ({ search, onChangeSearch, onSearch }) => {
   return (
@@ -15,7 +15,7 @@ const SearchBar = ({ search, onChangeSearch, onSearch }) => {
         type='button'
         onClick={onSearch}
       >
-        <Search className='aspect-square w-full stroke-2 text-yellow-900' />
+        <SearchIcon className='aspect-square w-full stroke-2 text-yellow-900' />
       </button>
     </div>
   );

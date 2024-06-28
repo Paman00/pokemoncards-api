@@ -1,4 +1,4 @@
-import { Close } from '@components/Icons/Close';
+import { CloseIcon } from '@components/Icons/Close';
 import { EnergyImage } from './EnergyImage';
 
 const FullviewCard = ({ card, onUnFocusCard }) => {
@@ -10,7 +10,7 @@ const FullviewCard = ({ card, onUnFocusCard }) => {
           onClick={onUnFocusCard}
           type='button'
         >
-          <Close />
+          <CloseIcon />
         </button>
       </div>
       <div className='flex max-w-full flex-wrap justify-center gap-4 overflow-auto p-2'>
